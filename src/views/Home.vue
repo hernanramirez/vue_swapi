@@ -1,7 +1,12 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <br />
+    <HelloWorld msg="Elementos de programación"/>
+    <ul>
+        <li>Vue 3.0</li>
+        <li>Bootstrap-vue</li>
+        
+    </ul>
   </div>
 </template>
 

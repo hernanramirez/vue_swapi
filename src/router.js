@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Contacts from './views/Contacts.vue'
 import People from './views/People.vue'
+import Films from './views/Films.vue'
+import FilmDetail from './views/FilmDetail.vue'
 
 Vue.use(Router)
 
@@ -32,6 +34,17 @@ export default new Router({
       path: '/people',
       name: 'people',
       component: People
+    },
+    {
+      path: '/films',
+      name: 'films',
+      component: Films
+    },
+    {
+      path: '/film_detail',
+      name: 'film_detail',
+      component: FilmDetail
     }
+
   ]
 })

@@ -12,9 +12,9 @@
       </div>
       <nav id="nav-menu-container">
         <ul class="nav-menu">
-          <li class="menu-active"><a href="#hero">Home</a></li>
-          <li><a href="#about">Films</a></li>
-          <li><a href="#services">Personajes</a></li>
+          <li class="menu-active"><a href="/">Home</a></li>
+          <li><a href="/People">People</a></li>
+          <li><a href="/Films">Films</a></li>      
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>

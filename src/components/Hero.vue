@@ -6,10 +6,11 @@
     ============================-->
     <section id="hero">
       <div class="hero-container">
-        <h3>Welcome to</h3>
+        <br>
+        <h3><font color="white">Welcome to</font></h3>
         <img src="../assets/images/logo_big.png">
         <br>
-        <h5>Desafio, J. Hernán Ramírez R.</h5>
+        <h5><font color="white">Desafio: J. Hernán Ramírez R. </font></h5>
         
       </div>
     </section><!-- #hero -->
