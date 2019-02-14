@@ -7,13 +7,17 @@ import "./assets/css/style.css"
 import router from './router'
 import store from './store'
 import APIService from './APIService'
+import Vuelidate from 'vuelidate';
+
 
 Vue.use(BootstrapVue)
+Vue.use(Vuelidate);
 Vue.config.productionTip = false
 
 new Vue({
   router,
   store,
   APIService,
+  validations: {},
   render: h => h(App)
 }).$mount('#app')

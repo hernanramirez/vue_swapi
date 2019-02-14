@@ -13,7 +13,10 @@
     "bootswatch": "^4.2.1",
     "jquery": "^3.3.1",
     "vue": "^2.5.22",
+    "vue-datepicker-ui": "^0.1.2",
     "vue-router": "^3.0.1",
+    "vuejs-datepicker": "^1.5.4",
+    "vuelidate": "^0.7.4",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
