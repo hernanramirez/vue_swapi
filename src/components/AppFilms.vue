@@ -3,6 +3,21 @@
 		<h1>Star Wars Films</h1>
 	<br />
 
+	<b-row>
+      <b-col md="6" class="my-1">
+        <b-form-group horizontal label="Filter" class="mb-0">
+          <b-input-group>
+            <b-form-input v-model="filter" placeholder="Search by title" />
+            <b-input-group-append>
+              <b-btn :disabled="!filter" @click="filter = ''">Clear</b-btn>
+            </b-input-group-append>
+          </b-input-group>
+        </b-form-group>
+      </b-col>
+    
+    </b-row>
+    <br />
+
     <b-table show-empty
              stacked="md"
              :items="films"
@@ -10,15 +25,28 @@
              :current-page="currentPage"
              :per-page="perPage"
              :filter="filter"
-             :sort-by.sync="sortBy"
-             :sort-desc.sync="sortDesc"
-             :sort-direction="sortDirection"
              @filtered="onFiltered"
     >
-     
+
+  
+    <template slot="actions" slot-scope="row">
+        <!-- We use @click.stop here to prevent a 'row-clicked' event from also happening -->
+        <b-button size="sm" @click.stop="filmDetail(row.item.url)">
+          Details
+        </b-button>
+    </template>
+
+    
+      
     </b-table>
 
+<b-row>
+      <b-col md="6" class="my-1">
+        <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="my-0" />
+      </b-col>
+    </b-row>
 
+    <!--
 
 	<table class="table hover" >
 		<thead>
@@ -38,6 +66,9 @@
 			</tr>
 		</tbody>
 	</table>
+
+    -->
+
 
 
 </div>
@@ -61,33 +92,41 @@
 				films: [],
 				directors: [],
 				director:'',
-				currentSort:'title',
-                currentSortDir:'asc',
-                next: null,
-                previous: null,
-                from: '',
-                to: '',
-                fields: [
+				fields: [
                    { key: 'title', label: 'Film', sortable: true, sortDirection: 'desc' },
                    { key: 'episode_id', label: 'Episode', sortable: true, sortDirection: 'desc' },
                    { key: 'director', label: 'Director', sortable: true, sortDirection: 'desc' },
                    { key: 'release_date', label: 'Release Date', sortable: true, sortDirection: 'desc' },
-
-                   
+                   { key: 'actions', label: 'Actions' },         
                 ],
-
+                currentPage: 1,
+                perPage: 5,
+                totalRows: 0,
+                //pageOptions: [ 5, 10, 15 ],
+                //sortBy: null,
+                //sortDesc: false,
+                //sortDirection: 'asc',
+                filter: null,
 			};
 
 		},
 
-
 		validations: {
-			query: {
+			filter: {
 				alpha,
 				required,
 				minLength: minLength(6)
 			}
 		},
+
+		computed: {
+            sortOptions () {
+                // Create an options list from our fields
+                return this.fields
+                .filter(f => f.sortable)
+                .map(f => { return { text: f.label, value: f.key } })
+            }
+        },
 
 		methods: {
 
@@ -115,10 +154,11 @@
 				});
 			},
 
-			getFilms(search, episode, directo, from, to){
+			getFilms(){
 
 				apiService.getFilms().then((data) => {
 					this.films = data.results;
+					this.totalRows = this.films.length;
 				});
 
 			},
@@ -138,11 +178,17 @@
 					throw err
 				})
 			}, 500),
+    
+            onFiltered (filteredItems) {
+                // Trigger pagination to update the number of buttons/pages due to filtering
+                this.totalRows = filteredItems.length
+                this.currentPage = 1
+            },
 
 		},
 
 		mounted() {
-			this.getFilms("","","","","");
+			this.getFilms();
 			this.getDirectors();
 		}
 	}	
