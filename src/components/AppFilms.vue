@@ -3,6 +3,23 @@
 		<h1>Star Wars Films</h1>
 	<br />
 
+    <b-table show-empty
+             stacked="md"
+             :items="films"
+             :fields="fields"
+             :current-page="currentPage"
+             :per-page="perPage"
+             :filter="filter"
+             :sort-by.sync="sortBy"
+             :sort-desc.sync="sortDesc"
+             :sort-direction="sortDirection"
+             @filtered="onFiltered"
+    >
+     
+    </b-table>
+
+
+
 	<table class="table hover" >
 		<thead>
 			<tr>
@@ -44,18 +61,20 @@
 				films: [],
 				directors: [],
 				director:'',
-				episodes: ['No filter',1, 2, 3, 4, 5, 6, 7],
-				numberOfPeoples:0,
-				info: null,
-				current_film: {},
-				date: '',
-				query: '',
-				currentSort:'name',
+				currentSort:'title',
                 currentSortDir:'asc',
                 next: null,
                 previous: null,
                 from: '',
                 to: '',
+                fields: [
+                   { key: 'title', label: 'Film', sortable: true, sortDirection: 'desc' },
+                   { key: 'episode_id', label: 'Episode', sortable: true, sortDirection: 'desc' },
+                   { key: 'director', label: 'Director', sortable: true, sortDirection: 'desc' },
+                   { key: 'release_date', label: 'Release Date', sortable: true, sortDirection: 'desc' },
+
+                   
+                ],
 
 			};
 
